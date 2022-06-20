@@ -88,7 +88,7 @@ class _HashPageState extends State<HashPage> {
               );
             }).toList(),
           ),
-          Text(
+          SelectableText(
             textoMostrar,
             style: Theme.of(context).textTheme.headline4,
           ),
