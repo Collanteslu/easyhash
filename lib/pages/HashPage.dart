@@ -47,52 +47,62 @@ class _HashPageState extends State<HashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          //caja para introducir el texto sin hashear
-          TextField(
-            decoration: const InputDecoration(
-              labelText: 'Introduce un texto a codificar',
+        body: Container(
+      margin: const EdgeInsets.all(100.0),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            //caja para introducir el texto sin hashear
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'Introduce un texto a codificar',
+              ),
+              onChanged: (String value) {
+                setState(() {
+                  _hashString = value;
+                  _hashText();
+                });
+              },
             ),
-            onChanged: (String value) {
-              setState(() {
-                _hashString = value;
-                _hashText();
-              });
-            },
-          ),
-          //select con loas distintos tipos de hasheo
-          DropdownButton<String>(
-            value: _hashMethod,
-            isExpanded: true,
-            onChanged: (String? value) {
-              setState(() {
-                _hashMethod = value!;
-                _hashText();
-              });
-            },
-            items: <String>[
-              'MD5',
-              'SHA1',
-              'SHA224',
-              'SHA256',
-              'SHA384',
-              'SHA512',
-            ].map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-          SelectableText(
-            textoMostrar,
-            style: Theme.of(context).textTheme.headline4,
-          ),
-        ],
+            const SizedBox(
+              height: 30.0,
+            ),
+
+            //select con loas distintos tipos de hasheo
+            DropdownButton<String>(
+              value: _hashMethod,
+              isExpanded: true,
+              onChanged: (String? value) {
+                setState(() {
+                  _hashMethod = value!;
+                  _hashText();
+                });
+              },
+              items: <String>[
+                'MD5',
+                'SHA1',
+                'SHA224',
+                'SHA256',
+                'SHA384',
+                'SHA512',
+              ].map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            const SizedBox(
+              height: 30.0,
+            ),
+            SelectableText(
+              textoMostrar,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
       ),
     ));
   }
